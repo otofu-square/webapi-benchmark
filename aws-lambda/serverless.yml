@@ -9,4 +9,4 @@ functions:
     handler: handler.hello
 
 plugins:
-  serverless-plugin-typescript
+  - serverless-plugin-typescript

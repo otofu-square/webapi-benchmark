@@ -1,4 +1,10 @@
-export const hello = (event, context, callback) => {
+import { APIGatewayEvent, Context, Callback } from 'aws-lambda';
+
+export const execute = (
+  event: APIGatewayEvent,
+  context: Context,
+  callback: Callback,
+) => {
   const response = {
     statusCode: 200,
     body: JSON.stringify({

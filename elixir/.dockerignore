@@ -1,0 +1,7 @@
+_build
+deps
+.gitignore
+docker-compose.yml
+Dockerfile
+README.md
+.env.skeleton

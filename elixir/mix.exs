@@ -15,6 +15,9 @@ defmodule Elixir.Mixfile do
   end
 
   defp deps do
-    [{:cowboy, "~> 1.1.2"},
-     {:plug, "~> 1.3.4"}]  end
+    [
+      {:cowboy, "~> 1.1.2"},
+      {:plug, "~> 1.3.4"}
+    ]
+   end
 end

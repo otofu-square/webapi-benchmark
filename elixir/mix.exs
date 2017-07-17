@@ -11,10 +11,10 @@ defmodule Elixir.Mixfile do
   end
 
   def application do
-    [extra_applications: [:logger, :trot]]
+    [applications: [:cowboy, :plug]]
   end
 
   defp deps do
-    [{:trot, github: "hexedpackets/trot"}]
-  end
+    [{:cowboy, "~> 1.1.2"},
+     {:plug, "~> 1.3.4"}]  end
 end

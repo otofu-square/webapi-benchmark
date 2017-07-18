@@ -1,0 +1,8 @@
+.gitignore
+docker-compose.yml
+Dockerfile
+README.md
+.env.skeleton
+.env
+vendor
+.bundle

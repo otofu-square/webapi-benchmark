@@ -9,14 +9,25 @@ resource "aws_vpc" "webapi-benchmark-tf-vpc" {
   }
 }
 
-resource "aws_subnet" "webapi-benchmark-public" {
+resource "aws_subnet" "webapi-benchmark-public-a" {
   vpc_id                  = "${aws_vpc.webapi-benchmark-tf-vpc.id}"
   cidr_block              = "10.0.0.0/24"
   availability_zone       = "ap-northeast-1a"
   map_public_ip_on_launch = true
 
   tags {
-    Name = "${var.name}-public"
+    Name = "${var.name}-public-a"
+  }
+}
+
+resource "aws_subnet" "webapi-benchmark-public-c" {
+  vpc_id                  = "${aws_vpc.webapi-benchmark-tf-vpc.id}"
+  cidr_block              = "10.0.1.0/24"
+  availability_zone       = "ap-northeast-1c"
+  map_public_ip_on_launch = true
+
+  tags {
+    Name = "${var.name}-public-c"
   }
 }
 
@@ -41,8 +52,13 @@ resource "aws_route_table" "webapi-benchmark-public-rtb" {
   }
 }
 
-resource "aws_route_table_association" "public_a" {
-  subnet_id      = "${aws_subnet.webapi-benchmark-public.id}"
+resource "aws_route_table_association" "public-a" {
+  subnet_id      = "${aws_subnet.webapi-benchmark-public-a.id}"
+  route_table_id = "${aws_route_table.webapi-benchmark-public-rtb.id}"
+}
+
+resource "aws_route_table_association" "public-c" {
+  subnet_id      = "${aws_subnet.webapi-benchmark-public-c.id}"
   route_table_id = "${aws_route_table.webapi-benchmark-public-rtb.id}"
 }
 

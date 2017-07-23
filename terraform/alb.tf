@@ -1,5 +1,5 @@
 resource "aws_alb" "alb" {
-  subnets = ["${aws_subnet.webapi-benchmark-public.id}"]
+  subnets = ["${aws_subnet.webapi-benchmark-public-a.id}", "${aws_subnet.webapi-benchmark-public-c.id}"]
 
   tags = {
     Name = "${var.name}-alb"
@@ -13,10 +13,14 @@ resource "aws_alb_target_group" "alb" {
   vpc_id   = "${aws_vpc.webapi-benchmark-tf-vpc.id}"
 }
 
-resource "aws_alb_target_group_attachment" "alb" {
-  count            = 2
+resource "aws_alb_target_group_attachment" "alb-a" {
   target_group_arn = "${aws_alb_target_group.alb.arn}"
-  target_id        = "${element(aws_instance.webapi-benchmark-ecs.*.id, count.index)}"
+  target_id        = "${aws_instance.webapi-benchmark-ecs-a.id}"
+}
+
+resource "aws_alb_target_group_attachment" "alb-c" {
+  target_group_arn = "${aws_alb_target_group.alb.arn}"
+  target_id        = "${aws_instance.webapi-benchmark-ecs-c.id}"
 }
 
 resource "aws_alb_listener" "alb" {
